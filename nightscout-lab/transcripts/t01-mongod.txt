@@ -1,0 +1,10 @@
+# MongoDB: started from the extracted tarball, data files in ./db.
+
+$ ./mongo/bin/mongod --dbpath ./db --bind_ip 127.0.0.1 --port 27017 --fork --logpath ./logs/mongod.log
+(forked process started successfully; the matching line from its log:)
+
+$ grep -i "waiting for connections" logs/mongod.log | tail -1
+{"t":{"$date":"2026-10-30T03:59:14.201+00:00"},"s":"I",  "c":"NETWORK",  "id":23016,   "ctx":"listener","msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}
+
+$ node -e (ping MongoDB, using the driver Nightscout itself installed)
+{ ok: 1 }

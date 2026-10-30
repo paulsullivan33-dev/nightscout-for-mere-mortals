@@ -1,0 +1,8 @@
+# The web display itself: the lab has no browser, so it checks what the
+# server hands one - the page shell, its title, and its size.
+
+$ curl -s -o /dev/null -w "%{http_code} %{size_download} bytes\n" http://127.0.0.1:1337/
+200 43011 bytes
+
+$ curl -s http://127.0.0.1:1337/ | grep -o "<title>[^<]*</title>"
+<title>Nightscout</title>

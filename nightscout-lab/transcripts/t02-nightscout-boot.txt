@@ -1,0 +1,20 @@
+# Nightscout: launched against the lab MongoDB, test-only API secret.
+
+$ API_SECRET='mere-mortals-lab-secret' MONGO_CONNECTION='mongodb://127.0.0.1:27017/nightscout' PORT=1337 INSECURE_USE_HTTP=true node lib/server/server.js
+(first lines of the boot log:)
+
+API_SECRET has 135 bits of entropy
+++++++++++++++++++++++++++++++
+Nightscout Executing startBoot
+++++++++++++++++++++++++++++++
+Executing checkNodeVersion
+Node LTS version v24.22.1 is supported
+Executing checkEnv
+Executing augmentSettings
+Executing checkSettings
+Checking settings
+Executing setupStorage
+Setting up new connection to MongoDB with pool options: { maxPoolSize: 5, minPoolSize: 0, maxIdleTimeMS: 30000 }
+Successfully established connection to MongoDB
+  [... index creation and plugin setup ...]
+Listening on port 1337 null

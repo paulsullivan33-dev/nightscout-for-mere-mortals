@@ -1,0 +1,74 @@
+# Six invented sample readings, posted the way an uploader would post them.
+# The api-secret header carries the SHA-1 hash of the API secret passphrase,
+# never the passphrase itself:
+
+$ printf %s 'mere-mortals-lab-secret' | sha1sum
+43e17deecf3d66c2250822590f5d4d645e3c16ba  -
+
+$ cat entries.json   (dates are epoch milliseconds, five minutes apart)
+[
+  {
+    "type": "sgv",
+    "sgv": 112,
+    "direction": "Flat",
+    "date": 1793331841638,
+    "dateString": "2026-10-30T03:44:01.000Z",
+    "device": "lab-fixture"
+  },
+  {
+    "type": "sgv",
+    "sgv": 118,
+    "direction": "Flat",
+    "date": 1793332141638,
+    "dateString": "2026-10-30T03:49:01.000Z",
+    "device": "lab-fixture"
+  },
+  {
+    "type": "sgv",
+    "sgv": 126,
+    "direction": "SingleUp",
+    "date": 1793332441638,
+    "dateString": "2026-10-30T03:54:01.000Z",
+    "device": "lab-fixture"
+  },
+  {
+    "type": "sgv",
+    "sgv": 138,
+    "direction": "SingleUp",
+    "date": 1793332741638,
+    "dateString": "2026-10-30T03:59:01.000Z",
+    "device": "lab-fixture"
+  },
+  {
+    "type": "sgv",
+    "sgv": 145,
+    "direction": "Flat",
+    "date": 1793333041638,
+    "dateString": "2026-10-30T04:04:01.000Z",
+    "device": "lab-fixture"
+  },
+  {
+    "type": "sgv",
+    "sgv": 139,
+    "direction": "SingleDown",
+    "date": 1793333341638,
+    "dateString": "2026-10-30T04:09:01.000Z",
+    "device": "lab-fixture"
+  }
+]
+
+$ curl -s -X POST http://127.0.0.1:1337/api/v1/entries.json -H "Content-Type: application/json" -H "api-secret: <sha1 above>" -d @entries.json | jq "length, .[0]"
+6
+{
+  "type": "sgv",
+  "sgv": 112,
+  "direction": "Flat",
+  "date": 1793331841638,
+  "dateString": "2026-10-30T03:44:01.000Z",
+  "device": "lab-fixture",
+  "utcOffset": 0,
+  "sysTime": "2026-10-30T03:44:01.000Z",
+  "srvModified": 1793333341771,
+  "_id": "6ae4185d87842e08974bd303",
+  "srvCreated": 1793333341771
+}

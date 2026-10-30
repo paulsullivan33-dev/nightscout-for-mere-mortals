@@ -1,0 +1,43 @@
+# Reading the entries back: newest first, the way the display asks for them.
+
+$ curl -s "http://127.0.0.1:1337/api/v1/entries.json?count=6" | jq "map({sgv, direction, dateString})"
+[
+  {
+    "sgv": 139,
+    "direction": "SingleDown",
+    "dateString": "2026-10-30T04:09:01.000Z"
+  },
+  {
+    "sgv": 145,
+    "direction": "Flat",
+    "dateString": "2026-10-30T04:04:01.000Z"
+  },
+  {
+    "sgv": 138,
+    "direction": "SingleUp",
+    "dateString": "2026-10-30T03:59:01.000Z"
+  },
+  {
+    "sgv": 126,
+    "direction": "SingleUp",
+    "dateString": "2026-10-30T03:54:01.000Z"
+  },
+  {
+    "sgv": 118,
+    "direction": "Flat",
+    "dateString": "2026-10-30T03:49:01.000Z"
+  },
+  {
+    "sgv": 112,
+    "direction": "Flat",
+    "dateString": "2026-10-30T03:44:01.000Z"
+  }
+]
+
+$ curl -s http://127.0.0.1:1337/api/v1/entries/current.json | jq "map({sgv, direction})"
+[
+  {
+    "sgv": 139,
+    "direction": "SingleDown"
+  }
+]

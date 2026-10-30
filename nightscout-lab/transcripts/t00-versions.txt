@@ -1,0 +1,22 @@
+# The lab machine and the pieces installed on it.
+
+$ node --version
+v24.22.1
+
+$ npm --version
+10.9.4
+
+$ ./mongo/bin/mongod --version | head -2
+db version v8.0.4
+Build Info: {
+
+$ grep '"version"' nightscout/package.json | head -1
+  "version": "15.0.9",
+
+$ grep -A2 '"engines"' nightscout/package.json
+  "engines": {
+    "node": ">=20.x",
+    "npm": ">=10.x"
+
+$ uname -srm
+Linux 7.0.0-39-generic x86_64

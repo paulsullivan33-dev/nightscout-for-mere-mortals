@@ -1,0 +1,25 @@
+# Backing the database up with mongodump, and proving the dump restores.
+
+$ ./dbtools/bin/mongodump --uri mongodb://127.0.0.1:27017/nightscout --out backup
+2026-10-30T04:11:15.431+0000	done dumping nightscout.profile (0 documents)
+2026-10-30T04:11:15.432+0000	done dumping nightscout.food (0 documents)
+2026-10-30T04:11:15.433+0000	done dumping nightscout.auth_subjects (0 documents)
+2026-10-30T04:11:15.434+0000	done dumping nightscout.settings (0 documents)
+2026-10-30T04:11:15.435+0000	done dumping nightscout.activity (0 documents)
+2026-10-30T04:11:15.435+0000	done dumping nightscout.auth_roles (0 documents)
+2026-10-30T04:11:15.436+0000	done dumping nightscout.devicestatus (0 documents)
+2026-10-30T04:11:15.437+0000	done dumping nightscout.treatments (0 documents)
+
+$ ls -la backup/nightscout/ | head -8
+total 40
+drwxrwx--- 1 root root  658 Oct 30 04:11 .
+drwxrwx--- 1 root root   20 Oct 30 04:11 ..
+-rw-rw---- 1 root root    0 Oct 30 04:11 activity.bson
+-rw-rw---- 1 root root  262 Oct 30 04:11 activity.metadata.json
+-rw-rw---- 1 root root    0 Oct 30 04:11 auth_roles.bson
+-rw-rw---- 1 root root  252 Oct 30 04:11 auth_roles.metadata.json
+-rw-rw---- 1 root root    0 Oct 30 04:11 auth_subjects.bson
+
+$ ./dbtools/bin/mongorestore --uri mongodb://127.0.0.1:27017 --dryRun backup/ 2>&1 | tail -2
+2026-10-30T04:11:15.558+0000	dry run completed
+2026-10-30T04:11:15.558+0000	0 document(s) restored successfully. 0 document(s) failed to restore.

@@ -1,0 +1,8 @@
+# Checking a secret without changing anything: verifyauth.
+# Note what t05 already showed: reads are open by default - the GETs
+# there carried no secret at all. Writes are what the secret guards.
+
+$ curl -s http://127.0.0.1:1337/api/v1/verifyauth.json -H "api-secret: <sha1 of the passphrase>"
+{"status":200,"message":{"canRead":true,"canWrite":true,"isAdmin":true,"message":"OK","rolefound":"NOTFOUND","permissions":"ROLE"}}
+$ curl -s http://127.0.0.1:1337/api/v1/verifyauth.json   (no header)
+{"status":200,"message":{"canRead":true,"canWrite":false,"isAdmin":false,"message":"UNAUTHORIZED","rolefound":"NOTFOUND","permissions":"DEFAULT"}}

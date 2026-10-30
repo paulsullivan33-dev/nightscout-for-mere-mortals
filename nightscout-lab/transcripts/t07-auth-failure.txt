@@ -1,0 +1,9 @@
+# Writes without the right secret are refused.
+
+$ curl -s -X POST http://127.0.0.1:1337/api/v1/entries.json -H "Content-Type: application/json" -d "[{\"type\":\"sgv\",\"sgv\":100,\"date\":1793333341000}]" -w "\nHTTP %{http_code}\n"   (no api-secret header)
+{"status":401,"message":"Unauthorized","description":"Invalid/Missing"}
+HTTP 401
+
+$ curl -s -X POST http://127.0.0.1:1337/api/v1/entries.json -H "Content-Type: application/json" -H "api-secret: aaaa...(a wrong hash)" -d '[{"type":"sgv","sgv":100,"date":1793333341000}]' -w "\nHTTP %{http_code}\n"
+{"status":401,"message":"Unauthorized","description":"Invalid/Missing"}
+HTTP 401
